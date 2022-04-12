@@ -4,12 +4,12 @@
 
 Attention au compilateur de biblio : biber marche mais pas biblatex. Normalement c'est installé de base dans les versions récentes de MikTeX (windows) ou Texlive (linux).
 
-Pour être sûr que tout fonctionne, il faut compiler avec pdflatex, puis biber, puis pdflatex deux fois (soit manuellement par le terminal ou par le quick build de ton éditeur de texte favori). Louis a trouvé [un tuto pour forcer TexMaker à utiliser biber](https://tex.stackexchange.com/questions/154751/biblatex-with-biber-configuring-my-editor-to-avoid-undefined-citations/154788).
+Pour être sûr.e que tout fonctionne, il faut compiler avec pdflatex, puis biber, puis pdflatex deux fois (soit manuellement par le terminal, soit par le quick build de ton éditeur de texte favori). Louis a trouvé [un tuto pour forcer TexMaker à utiliser biber](https://tex.stackexchange.com/questions/154751/biblatex-with-biber-configuring-my-editor-to-avoid-undefined-citations/154788).
 
 ## Structure des fichiers
 
 * la structure générale et les options de formattage dans main.tex
-* des définitions de style (couleurs, trucs soulignés) dans style/style.tex. On peut même le passer en .gitignore pour que chacun puisse avoir sa version perso sans devoir rechanger le fichier à chaque `pull`
+* des définitions de styles (couleurs, trucs soulignés) dans style/style.tex. On peut même le passer en .gitignore pour que chacun puisse avoir sa version perso sans devoir rechanger le fichier à chaque `pull`
 * les chapitres à inclure avec `\input` dans chapters .tex. J'aime bien faire ça parce que ça sépare un peu le corps du texte du code de formattage
 
 ## Comment faire des modifs
@@ -26,7 +26,7 @@ Pour mettre un astérisque devant les publis importantes, j'ai trouvé [ça](htt
 
 Pour la phrase de description c'est basé sur deux discussions sur stackexchange ([ici](https://tex.stackexchange.com/questions/149578/how-to-comment-references-in-a-bibliography) pour le principe et [ici](https://tex.stackexchange.com/questions/238554/data-model-macro-cannot-be-used-in-preamble?noredirect=1#comment566230_238554) pour s'adapter aux nouvelles versions de biber). Dans main.tex ça donne [ça](https://github.com/jguerber/template-rapport-darwin/blob/main/main.tex#L83), en ajoutant `mynote = {la phrase à rajouter}` dans le fichier .bib.
 
-## Pistes d'améliorations
+## Pistes d'améliorations (non exhaustif)
 
 * Avoir une numérotation différente pour les figures et tableaux du texte général et les figures et tableaux de l'annexe
 * Pour l'instant j'utilise des titres de sections pas numérotés et je les rajoute ensuite à la table des matières manuellement (cf les commentaires de chapters/abstract.tex). Avec un `\newcommand` qui ferait ça tout seul ça serait moins lourd à écrire et ça permettrait que chacun.e puisse numéroter ou pas ses sections selon ses préférences
