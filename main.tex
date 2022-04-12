@@ -1,0 +1,112 @@
+% !TeX root = main.tex
+
+\documentclass[12pt]{article}
+
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{lipsum}
+
+% set page geometry
+\usepackage{geometry}
+
+\geometry{
+    a4paper,
+    left=25mm,
+    right=25mm,
+    top=25mm,
+    bottom=25mm
+}
+
+% times new roman
+\usepackage{mathptmx}
+
+%linespacing
+\usepackage{setspace}
+\onehalfspacing{}
+
+% useful packages
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{float}
+
+\usepackage{framed}
+
+\usepackage{multicol}
+
+
+%load bibliography
+\usepackage[backend=biber, 
+    citestyle=authoryear, 
+    bibstyle=verbose, 
+    datamodel=datamodels, 
+    maxbibnames=999, 
+    maxcitenames=2, 
+    natbib, 
+    sorting = nyt, 
+    doi=true, 
+    date = year]{biblatex}
+\usepackage{csquotes}
+
+\addbibresource{biblio.bib}
+
+\usepackage{xpatch}
+
+\makeatletter
+\providecommand{\bib@extsym}{}
+\DeclareEntryOption[string]{extsym}{\renewcommand{\bib@extsym}{#1}}
+\renewbibmacro*{begentry}{\textbf{\printtext{\bib@extsym}}}
+\makeatother
+
+\renewbibmacro{in:}{}
+\renewbibmacro{urldate}{}
+\renewbibmacro{url}{}
+
+\AtEveryBibitem{
+    \clearfield{issn}
+    \clearlist{language}
+}
+
+\xapptobibmacro{finentry}{\par\textbf{\printfield{mynote}}}{}{}
+
+
+
+\begin{document}
+
+\pagenumbering{roman}
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+\pagebreak
+
+\input{chapters/abstract.tex}
+
+\pagebreak
+\pagenumbering{arabic}
+
+\input{chapters/intro.tex}
+
+\pagebreak
+
+%small spacing for biblio
+\singlespacing{}
+
+\addcontentsline{toc}{section}{Références}
+\printbibliography{}
+
+\pagebreak
+\pagenumbering{Roman}
+
+%normal spacing for supplementary
+\onehalfspacing{}
+\input{chapters/supplementary.tex}
+
+
+
+
+
+\end{document}
