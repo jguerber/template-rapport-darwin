@@ -42,7 +42,7 @@
 \usepackage[backend=biber, 
     citestyle=authoryear, 
     bibstyle=verbose, 
-    datamodel=datamodels, 
+    datamodel=datamodels, % charge datamodels.dbx
     maxbibnames=999, 
     maxcitenames=2, 
     natbib, 
@@ -51,32 +51,42 @@
     date = year]{biblatex}
 \usepackage{csquotes}
 
+%%%% Gestion de la biblio
+
+% chargement
 \addbibresource{biblio.bib}
 
+% package pour refaire les macros
 \usepackage{xpatch}
 
+% asterisque devant options={extsym={*}}
 \makeatletter
 \providecommand{\bib@extsym}{}
 \DeclareEntryOption[string]{extsym}{\renewcommand{\bib@extsym}{#1}}
 \renewbibmacro*{begentry}{\textbf{\printtext{\bib@extsym}}}
 \makeatother
 
-\renewbibmacro{in:}{}
-\renewbibmacro{urldate}{}
-\renewbibmacro{url}{}
+% on enleve les champs useless
+\renewbibmacro{in:}{} % "in" devant le nom de revue
+\renewbibmacro{urldate}{} % date de téléchargement du pdf
+\renewbibmacro{url}{} % url (redondant si on a le doi)
 
 \AtEveryBibitem{
-    \clearfield{issn}
-    \clearlist{language}
+    \clearfield{issn} % issn
+    \clearlist{language} % langue de l'article
 }
 
+% (pas compris pourquoi des fois ça doit etre renewbibmacro
+% et des fois AtEveryBibItem mais ça marche)
+
+% on ajoute mynote à la fin
 \xapptobibmacro{finentry}{\par\textbf{\printfield{mynote}}}{}{}
 
-\input{style/style.tex}
+\input{style/style.tex} % inclure la feuille de style
 
 \begin{document}
 
-\pagenumbering{roman}
+\pagenumbering{roman} % petits chiffres romains pour les pages hors 30 pages
 
 \setcounter{tocdepth}{2}
 \tableofcontents
@@ -86,7 +96,7 @@
 \input{chapters/abstract.tex}
 
 \pagebreak
-\pagenumbering{arabic}
+\pagenumbering{arabic} % chiffres arabes pour les 30 pages
 
 \input{chapters/intro.tex}
 
@@ -99,14 +109,10 @@
 \printbibliography{}
 
 \pagebreak
-\pagenumbering{Roman}
+\pagenumbering{Roman} % grands chiffres romains pour l'annexe
 
 %normal spacing for supplementary
 \onehalfspacing{}
 \input{chapters/supplementary.tex}
-
-
-
-
 
 \end{document}
