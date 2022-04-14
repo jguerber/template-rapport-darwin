@@ -82,6 +82,18 @@
 % on ajoute mynote à la fin
 \xapptobibmacro{finentry}{\par\textbf{\printfield{mynote}}}{}{}
 
+% citations en police normale
+\AtBeginDocument{\protected\def\mkbibnamefamily#1{%
+\textnohyphenation{#1}}}
+
+% définit \beginsupplement pour le début de l'annexe
+\newcommand{\beginsupplement}{
+        \setcounter{table}{0}
+        \renewcommand{\thetable}{S\arabic{table}}%
+        \setcounter{figure}{0}
+        \renewcommand{\thefigure}{S\arabic{figure}}%
+     }
+
 \input{style/style.tex} % inclure la feuille de style
 
 \begin{document}
@@ -113,6 +125,7 @@
 
 %normal spacing for supplementary
 \onehalfspacing{}
+\beginsupplement{}
 \input{chapters/supplementary.tex}
 
 \end{document}
