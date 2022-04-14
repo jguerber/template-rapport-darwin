@@ -101,6 +101,12 @@
     \addcontentsline{toc}{section}{#2} % dans la TOC
 }
 
+% pareil pour les subsection
+\newcommand{\newsubsection}[2]{
+    \subsection*{#1}
+    \addcontentsline{toc}{subsection}{#2}
+}
+
 \input{style/style.tex} % inclure la feuille de style
 
 \begin{document}
