@@ -94,6 +94,13 @@
         \renewcommand{\thefigure}{S\arabic{figure}}%
      }
 
+% une commande qui crée une section non numérotée mais
+% l'ajoute à la table des matières quand même
+\newcommand{\newsection}[2]{
+    \section*{#1} % sans le numéro
+    \addcontentsline{toc}{section}{#2} % dans la TOC
+}
+
 \input{style/style.tex} % inclure la feuille de style
 
 \begin{document}
