@@ -37,13 +37,16 @@
 
 \usepackage{multicol}
 
+\usepackage{ifthen}
+\usepackage{tikz}
+
 
 %load bibliography
 \usepackage[backend=biber, 
     citestyle=authoryear, 
     bibstyle=verbose, 
     datamodel=datamodels, % charge datamodels.dbx
-    maxbibnames=999, 
+    maxbibnames=10, 
     maxcitenames=2, 
     natbib, 
     sorting = nyt, 
@@ -80,11 +83,18 @@
 % et des fois AtEveryBibItem mais ça marche)
 
 % on ajoute mynote à la fin
-\xapptobibmacro{finentry}{\par\textbf{\printfield{mynote}}}{}{}
+\xapptobibmacro{finentry}{ \textbf{\printfield{mynote}}}{}{}
 
 % citations en police normale
 \AtBeginDocument{\protected\def\mkbibnamefamily#1{%
 \textnohyphenation{#1}}}
+
+% premier.e + (n-1) auteurices
+\DefineBibliographyStrings{french}{andothers={
+    \ifthenelse{\arabic{author} < 11}
+    {et~al.}
+    {et~\pgfmathparse{int(\arabic{author} - 1)}\pgfmathresult{} auteur.e.s}
+}}
 
 % définit \beginsupplement pour le début de l'annexe
 \newcommand{\beginsupplement}{
