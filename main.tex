@@ -90,9 +90,11 @@
 \textnohyphenation{#1}}}
 
 % premier.e + (n-1) auteurices
-\DefineBibliographyStrings{french}{andothers=
+\DefineBibliographyStrings{french}{andothers={
+    \ifthenelse{\arabic{author} < 10}
+    {et~al.}
     {et~\pgfmathparse{int(\arabic{author} - 1)}\pgfmathresult{} co-auteur.e.s}
-}
+}}
 
 % définit \beginsupplement pour le début de l'annexe
 \newcommand{\beginsupplement}{
